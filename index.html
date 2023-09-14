@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/image/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/image/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/image/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/image/site.webmanifest" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/fishword.css" rel="stylesheet" />
+    <title>Fishword</title>
+  </head>
+  <body class="m-4">
+    <div class="container">
+      <form class="row g-3">
+        <div class="col-12"><b>ГОЛОВОЛОМКА ИЗ КАФЕ "ДАЧА"</b><br />Найди 36 видов рыб</div>
+        <div class="col-12">
+          <table id="FishWordArea"></table>
+        </div>
+        <div class="col-12">
+          <label class="form-label"
+            ><b>ОТВЕТЫ</b><br />Выбери название рыбы
+          </label>
+          <select class="form-select col-mywidth" id="SelectAnswer">
+            <option selected value="0">Выбери...</option>
+            <option value="1">1 - Вариант 1</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script src="js/fishword.js"></script>
+</html>
