@@ -20,5 +20,5 @@ td{
 }
 
 .container{
-  width: 460px
+  max-width: 460px
 }
