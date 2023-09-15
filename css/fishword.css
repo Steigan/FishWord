@@ -13,8 +13,12 @@ td{
   font-weight: bold;
 }
 .col-mywidth{
-  width: 422px;
+  max-width: 422px;
 }
 .highlighted{
   background-color: green;
+}
+
+.container{
+  width: 460px
 }
