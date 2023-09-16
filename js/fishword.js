@@ -40,17 +40,59 @@ const answers = [
   { value: "Язь", letters: [106, 121, 136] },
 ];
 
-function highlightFish() {
+var hotLetters = {};
+var highlightedLetters = [];
+var magicMode = false;
+
+function toggleFishes(fishes) {
   const value = Number(document.getElementById("SelectAnswer").value);
   const letters = Array.from(document.getElementsByTagName("td"));
-  letters.forEach((element) => {
-    element.className = "";
+
+  highlightedLetters.forEach((letter) => {
+    letters[letter].className = "";
   });
-  if (value > 0) {
-    answers[value - 1].letters.forEach((letter) => {
+  highlightedLetters = [];
+  fishes.forEach((fish) => {
+    answers[fish].letters.forEach((letter) => {
       letters[letter].className = "highlighted";
+      highlightedLetters.push(letter);
+    });
+  });
+}
+
+function selectFish() {
+  const value = Number(this.value);
+  if (value > 0) {
+    toggleFishes([value - 1]);
+  } else {
+    toggleFishes([]);
+  }
+}
+
+function magicCursorMouseOver() {
+  let arr = hotLetters[Number(this.id)];
+  if (arr === undefined) {
+    toggleFishes([]);
+  } else {
+    toggleFishes(arr);
+  }
+}
+
+function toggleMagicCursor() {
+  magicMode = this.checked;
+  let select_answer = document.getElementById("SelectAnswer");
+  if (magicMode) {
+    select_answer.value = "0";
+    toggleFishes([]);
+    Array.from(document.getElementsByTagName("td")).forEach((letter) => {
+      letter.addEventListener("mouseover", magicCursorMouseOver);
+    });
+  } else {
+    Array.from(document.getElementsByTagName("td")).forEach((letter) => {
+      letter.removeEventListener("mouseover", magicCursorMouseOver);
     });
   }
+  select_answer.hidden = magicMode;
 }
 
 function InitPlayground() {
@@ -59,7 +101,7 @@ function InitPlayground() {
   for (let rr = 0; rr < 14; rr++) {
     str = str + "<tr>";
     for (let cc = 0; cc < 14; cc++) {
-      str = str + "<td>" + fishwordarea.charAt(pos) + "</td>";
+      str = str + "<td id='" + pos + "'>" + fishwordarea.charAt(pos) + "</td>";
       pos++;
     }
     str = str + "</tr>";
@@ -77,11 +119,22 @@ function InitPlayground() {
       " - " +
       el.value +
       "</option>";
+
+    el.letters.forEach((letter) => {
+      if (hotLetters[letter] === undefined) {
+        hotLetters[letter] = [index];
+      } else {
+        hotLetters[letter].push(index);
+      }
+    });
   });
   let select_answer = document.getElementById("SelectAnswer");
   select_answer.innerHTML = str;
   select_answer.value = "0";
-  select_answer.addEventListener("change", highlightFish);
+  select_answer.addEventListener("change", selectFish);
+  let magic_cursor = document.getElementById("MagicCursor");
+  magic_cursor.checked = false;
+  magic_cursor.addEventListener("change", toggleMagicCursor);
 }
 
 InitPlayground();

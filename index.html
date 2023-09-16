@@ -29,19 +29,32 @@
   <body class="m-4">
     <div class="container">
       <form class="row g-3">
-        <div class="col-12"><b>ГОЛОВОЛОМКА ИЗ КАФЕ "ДАЧА"<br />Найди 36 видов рыб</b><br />
+        <div class="col-12">
+          <b>ГОЛОВОЛОМКА ИЗ КАФЕ "ДАЧА"<br />Найди 36 видов рыб</b><br />
           На квадратном поле из кучи букв зашифрованы названия видов рыб.<br />
-          Слова расположены по горизонтали, вертикали, диагонали вправо-вверх и диагонали вправо-вниз.<br />
+          Слова расположены по горизонтали, вертикали, диагонали вправо-вверх и
+          диагонали вправо-вниз.<br />
           Необходимо страницу распечатать и в "офф-лайне" найти 36 видов рыб.<br />
-          Найденный результат можно сравнить с ответами внизу страницы. Приз не предусмотрен.
+          Найденный результат можно сравнить с ответами внизу страницы. Приз не
+          предусмотрен.
         </div>
         <div class="col-12">
           <table id="FishWordArea"></table>
         </div>
         <div class="col-12">
-          <label class="form-label"
-            ><b>ОТВЕТЫ</b>
+          <b>ОТВЕТЫ</b>
+        </div>
+        <div class="col-12">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="MagicCursor"
+          />
+          <label class="form-check-label" for="MagicCursor">
+            "Волшебный" курсор мыши
           </label>
+        </div>
+        <div class="col-12">
           <select class="form-select col-mywidth" id="SelectAnswer">
             <option selected value="0">Выбери...</option>
             <option value="1">1 - Вариант 1</option>
