@@ -88,6 +88,7 @@ function toggleMagicCursor() {
       letter.addEventListener("mouseover", magicCursorMouseOver);
     });
   } else {
+    toggleFishes([]);
     Array.from(document.getElementsByTagName("td")).forEach((letter) => {
       letter.removeEventListener("mouseover", magicCursorMouseOver);
     });
