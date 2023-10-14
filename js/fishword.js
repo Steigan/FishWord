@@ -1,4 +1,4 @@
-const fishwordarea =
+const fishwordArea =
   "ОСЁТРСАУСЕЛЕЦТКЕФАЛЬЬЬСРЛИСЬУААЗТУНЕЦЬГСНТННМПИРАНЬЯАУКЬЬЬАБЕНЕДКТФДСТГМКЛАПЯСЕАОАСИАОУОИЛЕККСРКЁЛУЛЛБРМАСЯАЕПМААОАЕУЮХЕКЗЛАГППТТЛЦЕШФШАЬЮАИИСЗУБАТКАНРЦГЯКОЕГЛГОЛАВЛЬЬЕШМПАЛТУСЕЛЬДЬКАЬРЛОСОСЬЩУКАА";
 
 const answers = [
@@ -45,7 +45,7 @@ var highlightedLetters = [];
 var magicMode = false;
 
 function toggleFishes(fishes) {
-  const value = Number(document.getElementById("SelectAnswer").value);
+  const value = document.getElementById("SelectAnswer").valueAsNumber;
   const letters = Array.from(document.getElementsByTagName("td"));
 
   highlightedLetters.forEach((letter) => {
@@ -60,40 +60,31 @@ function toggleFishes(fishes) {
   });
 }
 
-function selectFish() {
-  const value = Number(this.value);
-  if (value > 0) {
-    toggleFishes([value - 1]);
-  } else {
-    toggleFishes([]);
-  }
+function selectFish(event) {
+  const value = Number(event.target.value);
+  toggleFishes(value > 0 ? [value - 1] : []);
 }
 
 function magicCursorMouseOver() {
   let arr = hotLetters[Number(this.id)];
-  if (arr === undefined) {
-    toggleFishes([]);
-  } else {
-    toggleFishes(arr);
-  }
+  toggleFishes(arr || []);
 }
 
 function toggleMagicCursor() {
   magicMode = this.checked;
-  let select_answer = document.getElementById("SelectAnswer");
-  if (magicMode) {
-    select_answer.value = "0";
-    toggleFishes([]);
-    Array.from(document.getElementsByTagName("td")).forEach((letter) => {
+  const selectAnswer = document.getElementById("SelectAnswer");
+  toggleFishes([]);
+  
+  Array.from(document.getElementsByTagName("td")).forEach((letter) => {
+    if (magicMode) {
       letter.addEventListener("mouseover", magicCursorMouseOver);
-    });
-  } else {
-    toggleFishes([]);
-    Array.from(document.getElementsByTagName("td")).forEach((letter) => {
+    } else {
       letter.removeEventListener("mouseover", magicCursorMouseOver);
-    });
-  }
-  select_answer.hidden = magicMode;
+    }
+  });
+  
+  selectAnswer.value = magicMode ? "0" : "";
+  selectAnswer.hidden = magicMode;
 }
 
 function InitPlayground() {
@@ -102,7 +93,7 @@ function InitPlayground() {
   for (let rr = 0; rr < 14; rr++) {
     str = str + "<tr>";
     for (let cc = 0; cc < 14; cc++) {
-      str = str + "<td id='" + pos + "'>" + fishwordarea.charAt(pos) + "</td>";
+      str = str + "<td id='" + pos + "'>" + fishwordArea.charAt(pos) + "</td>";
       pos++;
     }
     str = str + "</tr>";
@@ -122,6 +113,12 @@ function InitPlayground() {
       "</option>";
 
     el.letters.forEach((letter) => {
+      // ChatGPT refactoring --->
+      // el.letters.forEach((letter) => {
+      //   hotLetters[letter] = hotLetters[letter] || [];
+      //   hotLetters[letter].push(index);
+      // });      
+      // <--- ChatGPT refactoring
       if (hotLetters[letter] === undefined) {
         hotLetters[letter] = [index];
       } else {
