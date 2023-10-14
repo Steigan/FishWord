@@ -65,13 +65,13 @@ function selectFish(event) {
   toggleFishes(value > 0 ? [value - 1] : []);
 }
 
-function magicCursorMouseOver() {
-  let arr = hotLetters[Number(this.id)];
+function magicCursorMouseOver(event) {
+  let arr = hotLetters[Number(event.target.id)];
   toggleFishes(arr || []);
 }
 
-function toggleMagicCursor() {
-  magicMode = this.checked;
+function toggleMagicCursor(event) {
+  magicMode = event.target.checked;
   const selectAnswer = document.getElementById("SelectAnswer");
   toggleFishes([]);
   
