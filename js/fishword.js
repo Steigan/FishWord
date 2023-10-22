@@ -40,9 +40,9 @@ const answers = [
   { value: "Язь", letters: [106, 121, 136] },
 ];
 
-var hotLetters = {};
-var highlightedLetters = [];
-var magicMode = false;
+let hotLetters = {};
+let highlightedLetters = [];
+let magicMode = false;
 
 function toggleFishes(fishes) {
   const value = document.getElementById("SelectAnswer").valueAsNumber;
