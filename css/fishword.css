@@ -17,6 +17,7 @@ td{
 }
 .highlighted{
   background-color: green;
+  transition: background-color .4s ease;
 }
 
 .container{

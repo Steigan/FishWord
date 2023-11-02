@@ -72,7 +72,6 @@ function magicCursorMouseOver(event) {
 
 function toggleMagicCursor(event) {
   magicMode = event.target.checked;
-  const selectAnswer = document.getElementById("SelectAnswer");
   toggleFishes([]);
   
   Array.from(document.getElementsByTagName("td")).forEach((letter) => {
@@ -83,7 +82,8 @@ function toggleMagicCursor(event) {
     }
   });
   
-  selectAnswer.value = magicMode ? "0" : "";
+  const selectAnswer = document.getElementById("SelectAnswer");
+  selectAnswer.value = "0";
   selectAnswer.hidden = magicMode;
 }
 
@@ -91,26 +91,19 @@ function InitPlayground() {
   let pos = 0;
   let str = "";
   for (let rr = 0; rr < 14; rr++) {
-    str = str + "<tr>";
+    str += "<tr>";
     for (let cc = 0; cc < 14; cc++) {
-      str = str + "<td id='" + pos + "'>" + fishwordArea.charAt(pos) + "</td>";
+      str += `<td id="${pos}">${fishwordArea.charAt(pos)}</td>`;
       pos++;
     }
-    str = str + "</tr>";
+    str += "</tr>";
   }
   document.getElementById("FishWordArea").innerHTML = str;
 
   str = '<option value="0">Выбери рыбу своей мечты...</option>';
   answers.forEach((el, index) => {
-    str =
-      str +
-      '<option selected value="' +
-      (index + 1) +
-      '">' +
-      (index + 1) +
-      " - " +
-      el.value +
-      "</option>";
+    str +=
+      `<option value="${(index + 1)}">${(index + 1)} - ${el.value}</option>`;
 
     el.letters.forEach((letter) => {
       // ChatGPT refactoring --->
@@ -126,13 +119,13 @@ function InitPlayground() {
       }
     });
   });
-  let select_answer = document.getElementById("SelectAnswer");
-  select_answer.innerHTML = str;
-  select_answer.value = "0";
-  select_answer.addEventListener("change", selectFish);
-  let magic_cursor = document.getElementById("MagicCursor");
-  magic_cursor.checked = false;
-  magic_cursor.addEventListener("change", toggleMagicCursor);
+  const selectAnswer = document.getElementById("SelectAnswer");
+  selectAnswer.innerHTML = str;
+  selectAnswer.value = "0";
+  selectAnswer.addEventListener("change", selectFish);
+  const magicCursor = document.getElementById("MagicCursor");
+  magicCursor.checked = false;
+  magicCursor.addEventListener("change", toggleMagicCursor);
 }
 
 InitPlayground();
