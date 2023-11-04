@@ -1,25 +1,52 @@
-table{
+body {
+  margin: 20px 0;
+}
+
+table {
   background-color: bisque;
   border: 2px solid gray;
 }
-tr{
+tr {
   height: 30px;
 }
-td{
+td {
   border: 1px solid gray;
   width: 30px;
-  vertical-align: middle;
   text-align: center;
   font-weight: bold;
+  padding: 0;
 }
-.col-mywidth{
-  max-width: 422px;
-}
-.highlighted{
+.highlighted {
   background-color: green;
-  transition: background-color .4s ease;
+  transition: background-color 0.4s ease;
+}
+.container {
+  max-width: 422px;
+  padding: 0;
 }
 
-.container{
-  max-width: 460px
+@media screen and (max-width: 500px) {
+  .container {
+    max-width: 338px;
+  }
+  tr {
+    height: 24px;
+  }
+  td {
+    width: 24px;
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .container {
+    max-width: 296px;
+  }
+  tr {
+    height: 21px;
+  }
+  td {
+    width: 21px;
+    font-size: 0.7rem;
+  }
 }
